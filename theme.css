@@ -1527,7 +1527,10 @@ body {
   background-color: var(--nav-indentation-guide-color);
   z-index: 1;
   pointer-events: none;
-  transition: background-color var(--wiki-dur) var(--wiki-ease);
+  /* 不要给这里加 transition：伪元素的 transitionend 以 .nav-folder-children 为 target 派发，
+     app 的折叠动画在这个容器上监听 transitionend，不区分属性和伪元素，旧监听器也不会移除。
+     高亮变色的 transitionend 若恰好落在折叠动画开始后、写入目标样式前，收尾逻辑会提前执行，
+     随后写入的 height:0 残留为内联样式；再展开时子项溢出零高容器，与下方条目重叠且被挡住无法点击。 */
 }
 /* 鼠标停在某一层的直接子项上时点亮该层的引导线，
    只亮一层，避免多级祖先同时高亮造成噪音。 */
@@ -2140,7 +2143,6 @@ body:not(.native-scrollbars) ::-webkit-scrollbar-thumb:hover {
   .markdown-rendered table tbody tr td,
   .nav-file-title,
   .nav-folder-title,
-  .nav-folder-children::before,
   .collapse-icon svg.svg-icon,
   .workspace-tab-header,
   .metadata-property,
