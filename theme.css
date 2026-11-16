@@ -469,8 +469,8 @@ body {
   --code-operator: var(--wiki-syn-operator);
   --code-punctuation: var(--wiki-syn-punct);
 
-  /* 行号槽宽度（够放 3 位数字）；底色必须不透明，阅读视图横向滚动时要盖住滑过的代码 */
-  --wiki-gutter-w: 3.1em;
+  /* 行号槽宽度（收紧到刚好放 3 位数字）；底色必须不透明，阅读视图横向滚动时要盖住滑过的代码 */
+  --wiki-gutter-w: 2.65em;
   --wiki-gutter-bg: color-mix(in srgb, var(--text-normal) 4%, var(--code-background));
 }
 
@@ -553,7 +553,7 @@ body {
   z-index: 1;
   box-sizing: border-box;
   width: var(--wiki-gutter-w);
-  padding: 1.16em 0.9em 1.16em 0;
+  padding: 1.16em 0.5em 1.16em 0;
   /* 数字串比代码长得多：不参与撑高，按内容框裁掉最后一行之后的幽灵数字；
      尺寸已被 contain: size 固定，所以屏幕外的行号槽可以放心跳过布局与绘制（150 个代码块的页面省下约 3/4 的排版耗时） */
   contain: size;
@@ -659,7 +659,7 @@ body {
 }
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock-bg:not(.HyperMD-list-line):not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)::before {
   content: counter(wiki-ln);
-  padding-right: 0.9em;
+  padding-right: 0.55em;
   text-align: right;
   color: var(--wiki-gutter-fg);
 }
